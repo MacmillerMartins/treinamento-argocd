@@ -3,15 +3,41 @@ items:
 - apiVersion: argoproj.io/v1alpha1
   kind: Application
   metadata:
-    name: web-color
+    name: web-color-hlg
     namespace: argocd
   spec:
     destination:
-      namespace: web-color-argocd
+      namespace: web-color-argocd-hlg
       server: https://kubernetes.default.svc
     project: web-color-argocd
     source:
-      path: k8s
+      path: hlg
+      repoURL: https://github.com/MacmillerMartins/treinamento-argocd.git
+      targetRevision: HEAD
+    syncPolicy:
+      syncOptions:
+      - CreateNamespace=true
+      automated:
+        selfHeal: true
+        prune: true
+kind: List
+metadata:
+  resourceVersion: ""
+---
+apiVersion: v1
+items:
+- apiVersion: argoproj.io/v1alpha1
+  kind: Application
+  metadata:
+    name: web-color-prd
+    namespace: argocd
+  spec:
+    destination:
+      namespace: web-color-argocd-prd
+      server: https://kubernetes.default.svc
+    project: web-color-argocd
+    source:
+      path: prd
       repoURL: https://github.com/MacmillerMartins/treinamento-argocd.git
       targetRevision: HEAD
     syncPolicy:
