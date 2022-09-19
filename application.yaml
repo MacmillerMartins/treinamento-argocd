@@ -13,6 +13,7 @@ items:
     source:
       path: k8s
       repoURL: https://github.com/MacmillerMartins/treinamento-argocd.git
+      targetRevision: HEAD
     syncPolicy:
       syncOptions:
       - CreateNamespace=true
